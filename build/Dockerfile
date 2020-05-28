@@ -38,12 +38,9 @@ RUN  wget --no-check-certificate --no-cookies -O - https://packages.microsoft.co
    && apt-get update
    
 # install dotnet core 3.1
-RUN   apt-get install dotnet-sdk-3.1 -y \
-   && apt-get install aspnetcore-runtime-3.1 -y
+RUN   apt-get install aspnetcore-runtime-3.1 -y
 # install dotnet core 2.2
-RUN   apt-get install dotnet-sdk-2.2 -y \
-   && apt-get install dotnet-runtime-2.2 -y \
-   && apt-get install aspnetcore-runtime-2.2 -y
+RUN   apt-get install dotnet-runtime-2.2 aspnetcore-runtime-2.2 -y
 
 
 # restore sources to default
