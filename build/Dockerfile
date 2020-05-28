@@ -37,11 +37,14 @@ RUN  wget --no-check-certificate --no-cookies -O - https://packages.microsoft.co
    && apt-get install apt-transport-https \
    && apt-get update
    
-# install dotnet core
+# install dotnet core 3.1
 RUN   apt-get install dotnet-sdk-3.1 -y \
-   && apt-get install aspnetcore-runtime-3.1 -y \
-   && apt-get install dotnet-sdk-2.2 -y \
+   && apt-get install aspnetcore-runtime-3.1 -y
+# install dotnet core 2.2
+RUN   apt-get install dotnet-sdk-2.2 -y \
+   && apt-get install dotnet-runtime-2.2 -y \
    && apt-get install aspnetcore-runtime-2.2 -y
+
 
 # restore sources to default
 RUN \cp  /etc/apt/sources.list.old /etc/apt/sources.list
