@@ -2,13 +2,7 @@ FROM jenkins/jenkins:latest
 MAINTAINER symbolspace <symbolspace@outlook.com>
 
 RUN  mv /etc/apt/sources.list /etc/apt/sources.list.old \
-   && echo "deb http://mirrors.163.com/debian/ stretch-updates main non-free contrib" > /etc/apt/sources.list \
-   && echo "deb http://mirrors.163.com/debian/ stretch-backports main non-free contrib" >> /etc/apt/sources.list \
-   && echo "deb-src http://mirrors.163.com/debian/ stretch main non-free contrib" >> /etc/apt/sources.list \
-   && echo "deb-src http://mirrors.163.com/debian/ stretch-updates main non-free contrib" >> /etc/apt/sources.list \
-   && echo "deb-src http://mirrors.163.com/debian/ stretch-backports main non-free contrib" >> /etc/apt/sources.list \
-   && echo "deb http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" >> /etc/apt/sources.list \
-   && echo "deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" >> /etc/apt/sources.list \
+   && wget -O /etc/apt/sources.list https://github.com/symbolspace/jenkins-dotnet/raw/master/apt/source/sources-163.list \
    && apt update
 RUN wget -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.asc.gpg \   
    && mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/ \
