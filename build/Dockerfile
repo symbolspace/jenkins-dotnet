@@ -44,7 +44,7 @@ RUN   apt-get install aspnetcore-runtime-3.1 -y
 
 
 # restore sources to default
-RUN \cp  /etc/apt/sources.list.old /etc/apt/sources.list
+RUN \cp  /etc/apt/sources.list.bak /etc/apt/sources.list
 
 # restore user: jenkins
 USER jenkins
