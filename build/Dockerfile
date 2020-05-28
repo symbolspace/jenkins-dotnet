@@ -40,7 +40,7 @@ RUN  wget --no-check-certificate --no-cookies -O - https://packages.microsoft.co
 # install dotnet core 3.1
 RUN   apt-get install aspnetcore-runtime-3.1 -y
 # install dotnet core 2.2
-RUN   apt-get install dotnet-runtime-deps-2.2 dotnet-runtime-2.2 aspnetcore-runtime-2.2 -f -y
+RUN   apt-get install liblttng-ust0 dotnet-runtime-deps-2.2 dotnet-runtime-2.2 aspnetcore-runtime-2.2 -f -y
 
 
 # restore sources to default
