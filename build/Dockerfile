@@ -27,7 +27,7 @@ RUN  cp /etc/apt/sources.list /etc/apt/sources.list.bak \
    && echo "deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" >> /etc/apt/sources.list \
    && apt-get update
 
-# install dotnet core
+# set dotnet repo
 RUN  wget --no-check-certificate --no-cookies -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /microsoft.asc.gpg \
    && mv /microsoft.asc.gpg /etc/apt/trusted.gpg.d/ \
    && wget --no-check-certificate --no-cookies -O /etc/apt/sources.list.d/microsoft-prod.list https://packages.microsoft.com/config/debian/10/prod.list \
@@ -35,9 +35,12 @@ RUN  wget --no-check-certificate --no-cookies -O - https://packages.microsoft.co
    && chown root:root /etc/apt/sources.list.d/microsoft-prod.list \
    && apt-get update \
    && apt-get install apt-transport-https \
-   && apt-get update \
-   && apt-get install dotnet-sdk-3.1 -y \
+   && apt-get update
+   
+# install dotnet core
+RUN   apt-get install dotnet-sdk-3.1 -y \
    && apt-get install aspnetcore-runtime-3.1 -y \
+   && apt-get install dotnet-sdk-2.2 -y \
    && apt-get install aspnetcore-runtime-2.2 -y
 
 # restore sources to default
