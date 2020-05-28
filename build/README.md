@@ -8,7 +8,7 @@
 
 # .net core 
 * v3.1
-* v2.2
+* ~~*v2.2*~~
 
 # Other
 * time zone default 'Asia/Shanghai'
