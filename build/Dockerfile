@@ -38,7 +38,7 @@ RUN  wget --no-check-certificate --no-cookies -O - https://packages.microsoft.co
    && apt-get update
    
 # install dotnet core 3.1
-RUN   apt-get install aspnetcore-runtime-3.1 -y
+RUN   apt-get install dotnet-sdk-3.1 dotnet-runtime-3.1 aspnetcore-runtime-3.1 -f -y
 # install dotnet core 2.2
 #RUN   apt-get install liblttng-ust0 dotnet-runtime-deps-2.2 dotnet-runtime-2.2 aspnetcore-runtime-2.2 -f -y
 
