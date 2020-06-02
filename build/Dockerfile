@@ -18,33 +18,35 @@ USER root
 
 # using 163 mirrors
 RUN  cp /etc/apt/sources.list /etc/apt/sources.list.bak \
-   && echo "deb http://mirrors.163.com/debian/ stretch-updates main non-free contrib" > /etc/apt/sources.list \
-   && echo "deb http://mirrors.163.com/debian/ stretch-backports main non-free contrib" >> /etc/apt/sources.list \
-   && echo "deb-src http://mirrors.163.com/debian/ stretch main non-free contrib" >> /etc/apt/sources.list \
-   && echo "deb-src http://mirrors.163.com/debian/ stretch-updates main non-free contrib" >> /etc/apt/sources.list \
-   && echo "deb-src http://mirrors.163.com/debian/ stretch-backports main non-free contrib" >> /etc/apt/sources.list \
-   && echo "deb http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" >> /etc/apt/sources.list \
-   && echo "deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" >> /etc/apt/sources.list \
-   && apt-get update
+  && echo "deb http://mirrors.163.com/debian/ stretch-updates main non-free contrib" > /etc/apt/sources.list \
+  && echo "deb http://mirrors.163.com/debian/ stretch-backports main non-free contrib" >> /etc/apt/sources.list \
+  && echo "deb-src http://mirrors.163.com/debian/ stretch main non-free contrib" >> /etc/apt/sources.list \
+  && echo "deb-src http://mirrors.163.com/debian/ stretch-updates main non-free contrib" >> /etc/apt/sources.list \
+  && echo "deb-src http://mirrors.163.com/debian/ stretch-backports main non-free contrib" >> /etc/apt/sources.list \
+  && echo "deb http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" >> /etc/apt/sources.list \
+  && echo "deb-src http://mirrors.163.com/debian-security/ stretch/updates main non-free contrib" >> /etc/apt/sources.list \
+  && apt-get update
 
 # set dotnet repo
 RUN  wget --no-check-certificate --no-cookies -O - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /microsoft.asc.gpg \
-   && mv /microsoft.asc.gpg /etc/apt/trusted.gpg.d/ \
-   && wget --no-check-certificate --no-cookies -O /etc/apt/sources.list.d/microsoft-prod.list https://packages.microsoft.com/config/debian/10/prod.list \
-   && chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg \
-   && chown root:root /etc/apt/sources.list.d/microsoft-prod.list \
-   && apt-get update \
-   && apt-get install apt-transport-https \
-   && apt-get update
+  && mv /microsoft.asc.gpg /etc/apt/trusted.gpg.d/ \
+  && wget --no-check-certificate --no-cookies -O /etc/apt/sources.list.d/microsoft-prod.list https://packages.microsoft.com/config/debian/10/prod.list \
+  && chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg \
+  && chown root:root /etc/apt/sources.list.d/microsoft-prod.list \
+  && apt-get update \
+  && apt-get install apt-transport-https \
+  && apt-get update
    
 # install dotnet core 3.1
-RUN   apt-get install dotnet-sdk-3.1 dotnet-runtime-3.1 aspnetcore-runtime-3.1 -f -y
+RUN  apt-get install aspnetcore-runtime-3.1 -y
+RUN  apt-get install dotnet-sdk-3.1 -y
+RUN  dotnet --info
 # install dotnet core 2.2
-#RUN   apt-get install liblttng-ust0 dotnet-runtime-deps-2.2 dotnet-runtime-2.2 aspnetcore-runtime-2.2 -f -y
+#RUN apt-get install liblttng-ust0 dotnet-runtime-deps-2.2 dotnet-runtime-2.2 aspnetcore-runtime-2.2 -f -y
 
 
 # restore sources to default
-RUN \cp  /etc/apt/sources.list.bak /etc/apt/sources.list
+#RUN \cp  /etc/apt/sources.list.bak /etc/apt/sources.list
 
 # restore user: jenkins
 USER jenkins
